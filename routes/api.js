@@ -3,6 +3,7 @@ const vision = require('@google-cloud/vision');
 const client = new vision.ImageAnnotatorClient({
   keyFilename: 'apiKey.json'
 });
+const fs = require('fs');
 
 module.exports =(app) => {
     app.get("/test", (req, res) => {
