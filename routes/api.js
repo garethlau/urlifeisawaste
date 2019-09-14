@@ -47,6 +47,26 @@ module.exports = app => {
 		.then((res) => console.log(res));
     });
 
+    app.post("/api/saveFavourite", (req, res) => {
+        let recipeRef = req.app.get('ref').child('recipe');
+        let newRecipe = recipeRef.push();
+        let {name, ingredients, time, imageSrc} = req.body;
+        newRecipe.set({
+            name: name,
+            ingredients: ingredients,
+            time: time,
+            imageSrc: imageSrc
+        });
+        res.send({message: "nice"});
+    });
+
+    app.get("/api/getFavourites", (req, res) => {
+        let ref = req.app.get('ref');
+        ref.once("value", (snapshot) => {
+            console.log(snapshot.val());
+            res.send({data: snapshot.val()});
+        });
+    })
 
 }
 
