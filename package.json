@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/garethlau/urlifeisawaste/issues"
   },
-  "homepage": "https://github.com/garethlau/urlifeisawaste#readme"
+  "homepage": "https://github.com/garethlau/urlifeisawaste#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
