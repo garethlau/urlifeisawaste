@@ -32,7 +32,7 @@ module.exports = app => {
           objects.forEach(object => {
             console.log("Name: " + object.name);
             console.log("Confidence: " + object.score);
-            
+
             if(object.name != "Vegetable" && object.name != "Food" && object.name != "Fruit"){
                 fruits.push(object.name);
                 console.log(object.name);
@@ -43,7 +43,7 @@ module.exports = app => {
 
         fetch(url)
 		.then((data) => data.json())
-		.then((res) => console.log(res));
+        .then((urlResponse) => res.send({data: urlResponse}));
     });
 
     app.post("/api/saveFavourite", (req, res) => {
