@@ -5,7 +5,7 @@ const client = new vision.ImageAnnotatorClient({
 });
 const fs = require('fs');
 
-module.exports =(app) => {
+module.exports = app => {
     app.get("/test", (req, res) => {
         res.send({message: "hello"})
     })
