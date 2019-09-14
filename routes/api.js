@@ -32,8 +32,7 @@ module.exports = app => {
           objects.forEach(object => {
             console.log("Name: " + object.name);
             console.log("Confidence: " + object.score);
-            // const vertices = object.boundingPoly.normalizedVertices;
-            // vertices.forEach(v => console.log(`x: ${v.x}, y:${v.y}`));
+            
             if(object.name != "Vegetable" && object.name != "Food" && object.name != "Fruit"){
                 fruits.push(object.name);
                 console.log(object.name);
