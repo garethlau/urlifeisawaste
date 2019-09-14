@@ -1,17 +1,21 @@
 import React from 'react';
 import logo from './logo.svg';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Uploader from './components/Uploader';
+import FavouriteRecipes from './components/FavouriteRecipes';
+import Landing from './components/Landing';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-          <Uploader/>
-      </header>
+    <div>
+      <Router>
+        <Route exact path={"/"} component={Landing}/>
+        <Route path={"/upld"} component={Uploader}/>
+        <Route path={"/fav"} component={FavouriteRecipes}/>
+      </Router>
     </div>
   );
 }

@@ -48,35 +48,56 @@ const Uploader = (props) => {
     }
 
     return (
-        <>
+        <div
+            style={{
+                width: "100vw", 
+                height: "100vh", 
+                backgroundColor: "#282c34",
+                color: "white",
+                textAlign: "center",
+                paddingTop: "5%"
+            }}>
         {
             fileAdded ? 
                 <Container>
                     <Image style={{width: "100%"}} id="img" src="" rounded/>
                 </Container>
                 :
-                <div {...getRootProps()}>
-                    <input {...getInputProps()}/> 
-                    {
-                        isDragActive ? <p>Drop image here</p> : <p>Drag and drop image here</p>
-                    }
+                <div>
+                    <div style={{
+                        outline: "dashed 1px white",
+                        padding: "30% 0px 30% 0px",
+                        margin: "5% auto 5% auto",
+                        width: "80%"
+                    }} {...getRootProps()}>
+                        <input {...getInputProps()}/> 
+                        {
+                            isDragActive ? <p>Drop image here</p> : <p>Drag and drop image here</p>
+                        }
+                    </div>
                 </div>
         }
         {
             fileAdded ?
-                <div>
-                    <ButtonToolbar>
-                        <div style={{marginRight: "25px"}}>
-                            <Button variant="primary" onClick={() => uploadFile()}>Nice</Button>
-                        </div>
-                        <Button variant="secondary" onClick={() => removeFile()}>Not nice</Button>
-                    </ButtonToolbar>
-                   
+                <div style={{}}>
+                    <div style={{
+                        width: "max-content",
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                        marginTop: "10px"
+                    }}> 
+                        <ButtonToolbar>
+                            <div style={{marginRight: "25px"}}>
+                                <Button size="lg" variant="success" onClick={() => uploadFile()}>&#10004;</Button>
+                            </div>
+                            <Button size="lg" variant="danger" onClick={() => removeFile()}>&#10060;</Button>
+                        </ButtonToolbar>
+                   </div>
                 </div>
                 :
                 <p></p>
         }    
-        </>
+        </div>
     )
 }
 
