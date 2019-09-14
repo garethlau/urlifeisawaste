@@ -14,14 +14,16 @@ const Landing = (props) => {
     return (
         <div>
             <Jumbotron>
-                <h1>Food</h1>
+                <h1>Eliminate Food Waste.</h1>
                 <p>
-                    Have a handful of ingredients but not sure what to make? Don't worry, save time and try
-                    something new by uploading an image and getting recipes!
+                    We can help you eliminate food waste in one simple step. Upload a photo of the ingredients inside your fridge and we'll find you the recipes. It's that simple.
                 </p>
                 <p>
                     <Link to="/upld">
-                        <Button variant="primary">Start</Button>
+                        <Button style={{marginRight: "10px"}} variant="primary">Upload Photo</Button>
+                    </Link>
+                    <Link to="/fav">
+                    <Button variant="success">Favourite Recipes</Button> 
                     </Link>
                 </p>
             </Jumbotron>

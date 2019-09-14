@@ -1,6 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
+import ListGroupItem from 'react-bootstrap/ListGroupItem';
+import CardGroup from 'react-bootstrap/CardGroup';
+import CardColumns from 'react-bootstrap/CardColumns';
 
 const FavouriteRecipes = (props) => {
 
@@ -12,37 +16,46 @@ const FavouriteRecipes = (props) => {
             console.log(res.data.data.recipe);
             setRecipes(res.data.data.recipe);
         })
-    })
+    }, []);
 
-    const renderyy = () => {
+    const renderIngredients = (ingredients) => {
+        let ingredientsArray = ingredients.split(",");
+        if (ingredientsArray.length > 3) {
+            ingredientsArray = ingredientsArray.splice(0, 3);
+        }
+        console.log(ingredientsArray);
+        return ingredientsArray.map(ingredient => {
+            console.log(ingredient);
+            return (
+                <ListGroupItem>{ingredient}</ListGroupItem>
+            )
+        })
     }
 
     const renderRecipeList = () => {
         if (recipes != null) {
-            recipes.map(recipe => {
+
+            return (Object.keys(recipes).map(recipeId => {
+                console.log(recipes[recipeId]);
+                let recipeData = recipes[recipeId];
+                console.log(recipeData);
                 return (
-                    <Card className="bg-dark text-white">
-                        <Card.Img src="holder.js/100px270" alt="Card image" />
-                        <Card.ImgOverlay>
-                            <Card.Title>Card title</Card.Title>
-                            <Card.Text>
-                                This is a wider card with supporting text below as a natural lead-in to
-                                additional content. This content is a little bit longer.
-                            </Card.Text>
-                            <Card.Text>Last updated 3 mins ago</Card.Text>
-                        </Card.ImgOverlay>
-                  </Card>
+                    <Card style={{ width: '18rem' }}>
+                        <Card.Img style={{height: "300px", objectFit: "cover"}} variant="top" src={recipeData.imageSrc} />
+                        <Card.Body style={{color: "black"}}>
+                            <Card.Title>{recipeData.name}</Card.Title>
+                        </Card.Body>
+                        <ListGroup className="list-group-flush" style={{color: "black"}}>
+                            {renderIngredients(recipeData.ingredients)}
+                        </ListGroup>
+                        <Card.Body>
+                            <Card.Link href="#">Full Ingredient List</Card.Link>
+                            <Card.Link href="#">View More</Card.Link>
+                        </Card.Body>
+                    </Card>
                 )
-            })
+            }))
         }
-        else {
-            return (
-                <div>
-                    hi
-                </div>
-            )
-        }
-        
     }
 
     return (
@@ -50,13 +63,15 @@ const FavouriteRecipes = (props) => {
             <div
             style={{
                 width: "100vw", 
-                height: "100vh", 
+                height: "100%", 
                 backgroundColor: "#282c34",
                 color: "white",
                 textAlign: "center",
                 paddingTop: "5%"
             }}>
-                {renderRecipeList()}
+                <CardColumns>
+                    {renderRecipeList()}
+                </CardColumns>
             </div>
         </>
     )
