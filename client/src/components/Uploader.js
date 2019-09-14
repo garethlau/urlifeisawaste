@@ -11,6 +11,7 @@ const Uploader = (props) => {
 
     const [fileAdded, setFileAdded] = useState(false);
     const [base64Data, setBase64Data] = useState(null);
+    const [file, setFile] = useState([]);
 
     const onDrop = useCallback(droppedFiles => {
         // ondrop
@@ -19,6 +20,9 @@ const Uploader = (props) => {
             console.log("1 only pls");
         }
         else {
+            setFile(droppedFiles[0]);
+
+
             let reader = new FileReader();
             // convert image to base64
             reader.readAsDataURL(droppedFiles[0]);
@@ -38,7 +42,14 @@ const Uploader = (props) => {
     });
 
     const uploadFile = () => {
+        
         console.log("Base64Data is", base64Data);
+        axios.post("http://localhost:5000/getFruits", {
+            base64Data: base64Data
+        }).then(response => {
+            console.log("respones from uploadFIle is", response);
+        })
+
     };
 
     const removeFile = () => {
