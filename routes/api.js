@@ -19,10 +19,9 @@ module.exports = app => {
 
 
         console.log(req.body.base64Data.slice(0, 50));
-        var base64Data = req.body.base64Data.replace(/^data:image\/png;base64,/, "");
-        fs.writeFile("image.jpg", new Buffer(base64Data, "base64"), (response) => {
+        var base64Data = req.body.base64Data.replace(/^data:image\/jpeg;base64,/, "");
+        fs.writeFile("image.jpg", base64Data, 'base64', (response) => {
             console.log("response", response);
-            console.log("new file has been saved");
         })
         
         const client = new vision.ImageAnnotatorClient({
@@ -30,7 +29,7 @@ module.exports = app => {
         });
         
         const request = {
-            image: {content: fs.readFileSync('veggiesfruits.jpg')},
+            image: {content: fs.readFileSync('image.jpg')},
             /*
             image: {
                 content: req.body.base64Data
@@ -51,7 +50,8 @@ module.exports = app => {
             }
         })
 
-        let url = "https://api.spoonacular.com/recipes/findByIngredients?ingredients=" + fruits.join(",+") + "&ignorePantry=true&apiKey=b68cedbfb5cc42939208a4b5bb63c5e3";
+        let url = "https://api.spoonacular.com/recipes/findByIngredients?ingredients=" + fruits.join(",+") + "&ignorePantry=true&apiKey=b32822355598421986e052faa2ac93b1";
+        console.log(url);
         // let url = "";
         fetch(url)
 		.then((data) => data.json())
