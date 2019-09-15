@@ -20,7 +20,7 @@ module.exports = app => {
 
         console.log(req.body.base64Data.slice(0, 50));
         var base64Data = req.body.base64Data.replace(/^data:image\/jpeg;base64,/, "");
-        fs.writeFile("image.jpg", base64Data, 'base64', (response) => {
+        fs.writeFileSync("image.jpg", base64Data, 'base64', (response) => {
             console.log("response", response);
         })
         
@@ -30,21 +30,17 @@ module.exports = app => {
         
         const request = {
             image: {content: fs.readFileSync('image.jpg')},
-            /*
-            image: {
-                content: req.body.base64Data
-            }
-            */
         };
         
           let [result] = await client.objectLocalization(request);
+          console.log("i made it")
           let objects = result.localizedObjectAnnotations;
           let fruits = []
           objects.forEach(object => {
             console.log("Name: " + object.name);
             console.log("Confidence: " + object.score);
 
-            if(object.name != "Vegetable" && object.name != "Food" && object.name != "Fruit"){
+            if(object.name != "Food"  && object.name != "Packaged goods" && object.name != "Vegetable" && object.name != "vegetable" && object.name != "Fruits"){
                 fruits.push(object.name);
                 console.log(object.name);
             }

@@ -19,12 +19,11 @@ const FavouriteRecipes = (props) => {
     }, []);
 
     const renderIngredients = (ingredients) => {
-        let ingredientsArray = ingredients.split(",");
-        if (ingredientsArray.length > 3) {
-            ingredientsArray = ingredientsArray.splice(0, 3);
+        if (ingredients.length > 3) {
+            ingredients = ingredients.splice(0, 3);
         }
-        console.log(ingredientsArray);
-        return ingredientsArray.map(ingredient => {
+        console.log(ingredients);
+        return ingredients.map(ingredient => {
             console.log(ingredient);
             return (
                 <ListGroupItem>{ingredient}</ListGroupItem>
@@ -50,7 +49,7 @@ const FavouriteRecipes = (props) => {
                         </ListGroup>
                         <Card.Body>
                             <Card.Link href="#">Full Ingredient List</Card.Link>
-                            <Card.Link href="#">View More</Card.Link>
+                            <Card.Link href="#">Remove</Card.Link>
                         </Card.Body>
                     </Card>
                 )
