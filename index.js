@@ -23,5 +23,4 @@ app.use(cors());
 app.use(bodyParser.json())
 require('./routes/api.js')(app);
 
-
 app.listen(5000);
