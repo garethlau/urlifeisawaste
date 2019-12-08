@@ -28,6 +28,8 @@ module.exports = app => {
             keyFilename: './routes/apiKey.json'
         });
         
+
+        
         const request = {
             image: {content: fs.readFileSync('image.jpg')},
             /*
@@ -37,9 +39,9 @@ module.exports = app => {
             */
         };
         
-          let [result] = await client.objectLocalization(request);
-          let objects = result.localizedObjectAnnotations;
-          let fruits = []
+          const [result] = await client.objectLocalization(request);
+          const objects = result.localizedObjectAnnotations;
+          let fruits = [];
           objects.forEach(object => {
             console.log("Name: " + object.name);
             console.log("Confidence: " + object.score);
