@@ -1,5 +1,7 @@
 import React from 'react';
 
+import axios from 'axios';
+
 import Card from 'react-bootstrap/Card';
 import CardColumns from 'react-bootstrap/CardColumns';
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -18,6 +20,20 @@ const RecipeList = (props) => {
         })
     }
 
+    const addFavourite = (recipe) => {
+        let data = {
+            name: recipe.title,
+            ingredients: recipe.usedIngredients.map(ingredient => ingredient.name),
+            time: "30",
+            imageSrc: recipe.image
+        }
+        console.log("adding", data);
+        axios.post("http://localhost:5000/api/saveFavourite", data).then((response) => {
+            console.log("added", data.name);
+        })
+        
+    }
+
     const renderCards = () => {
         return props.recipes.map(recipe => {
             console.log(recipe);
@@ -31,8 +47,7 @@ const RecipeList = (props) => {
                         {renderIngredients(recipe.usedIngredients)}
                     </ListGroup>
                     <Card.Body>
-                        <Card.Link href="#">Full Ingredient List</Card.Link>
-                        <Card.Link href="#">View More</Card.Link>
+                        <Card.Link onClick={() => {addFavourite(recipe)}} href="#">Add to Favourite</Card.Link>
                     </Card.Body>
                 </Card>
             )
@@ -40,9 +55,19 @@ const RecipeList = (props) => {
     }
 
     return (
-        <CardColumns>
-            {renderCards()}
-        </CardColumns>
+        <div
+            style={{
+                width: "100vw", 
+                height: "100%", 
+                backgroundColor: "#282c34",
+                color: "white",
+                textAlign: "center",
+                paddingTop: "5%"
+            }}>
+            <CardColumns>
+                {renderCards()}
+            </CardColumns>
+        </div>
 
     )
     
